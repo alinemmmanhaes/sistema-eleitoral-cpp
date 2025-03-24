@@ -4,6 +4,10 @@
 #include <iostream>
 #include <string>
 
+#include <map>
+#include <list>
+#include "Candidato.hpp"
+
 using namespace std;
 
 class Partido{
@@ -13,7 +17,8 @@ class Partido{
     int qtdVotosNominais;
     int qtdVotosLegenda;
     int candidatosEleitos;
-    //candidatos hash e list
+    map<int, Candidato*> mapCandidatos;
+    list<Candidato*> listCandidatos;
 
     public:
     Partido(const int& numero, const string& sigla, const bool& federacao) : 
@@ -32,12 +37,12 @@ class Partido{
     const int &getQtdCandidatosEleitos() const;
     //candidato
 
-    //add candidato
-    //calcula qtd candidatos eleitos
-    //ordena candidatos
+    void insereCandidato(const Candidato* c);
+    void calculaQtdCandidatosEleitos();
+    void ordenaCandidatos();
 
     void aumentaVotosLegenda(const int& qtdVotos);
-    void aumentaVotosNominais(const int& qtdVotos);
+    void aumentaVotosNominais(const int& qtdVotos, Candidato* c);
 
     const string &toString() const;
 };

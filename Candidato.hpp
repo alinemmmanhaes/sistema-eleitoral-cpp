@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 
-#include "Partido.hpp"
+class Partido;
 
 using namespace std;
 
@@ -15,11 +15,11 @@ class Candidato{
     //Data nascimento
     int idade;
     bool eleito;
-    int genero;
+    bool genero;
     int qtdVotos;
 
     public:
-    Candidato(const int& numero, const string& nome, Partido* partido, /*nascimento,*/ const bool& eleito, const int& genero) : 
+    Candidato(const int& numero, const string& nome, Partido* partido, /*nascimento,*/ const bool& eleito, const bool& genero) : 
     numero(numero), nome(nome), partido(partido), eleito(eleito), genero(genero){
         this->qtdVotos = 0;
         //nascimento e idade
@@ -31,7 +31,7 @@ class Candidato{
     //nascimento
     const int &getIdade() const;
     const bool &getEleito() const;
-    const int &getGenero() const;
+    const bool &getGenero() const;
     const int &getQtdVotos() const;
 
     void aumentaQtdVotos(const int &votos);

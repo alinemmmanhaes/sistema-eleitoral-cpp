@@ -16,7 +16,7 @@ const int &Candidato::getIdade() const{
 const bool &Candidato::getEleito() const{
     return eleito;
 }
-const int &Candidato::getGenero() const{
+const bool &Candidato::getGenero() const{
     return genero;
 }
 const int &Candidato::getQtdVotos() const{
