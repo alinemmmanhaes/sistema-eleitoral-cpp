@@ -6,7 +6,7 @@ const int &Candidato::getNumero() const{
 const string &Candidato::getNome() const{
     return nome;
 }
-Partido &Candidato::getPartido() const{
+Partido* &Candidato::getPartido() const{
     return *partido;
 }
 //nascimento
@@ -26,7 +26,9 @@ const int &Candidato::getQtdVotos() const{
 void Candidato::aumentaQtdVotos(const int &votos){
     this->qtdVotos += votos;
 }
-//void calculaIdade()
+void Candidato::calculaIdade(const int& dia, const int& mes, const int& ano){
+
+}
 
 const string &Candidato::toString() const{
     string s = nome + " (" + partido.getSigla() + ", " + qtdVotos;

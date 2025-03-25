@@ -21,7 +21,14 @@ const int &Partido::getQtdVotosLegenda() const{
 const int &Partido::getQtdCandidatosEleitos() const{
     return this->candidatosEleitos;
 }
-//candidato
+map<int, Candidato*> Partido::getCandidatos() const{
+    return mapCandidatos;
+}
+Candidato* Partido::getCandidatoPos(const int& i) const{
+    list<Candidato*>:: iterator it = listCandidatos.begin();
+    advance(it, i);
+    return *it;
+}
 
 void Partido::insereCandidato(const Candidato* c){
     int numero = c->getNumero();
@@ -32,11 +39,19 @@ void Partido::calculaQtdCandidatosEleitos(){
         if((it->second)->getEleito) candidatosEleitos++;
     }
 }
+
+bool comparaCandidatos(Candidato* c1, Candidato* c2){
+    if(c1->getQtdVotos() != c2->getQtdVotos()){
+        return c1->getQtdVotos() > c2->getQtdVotos();
+    }
+    return c1->getIdade() > c2->getIdade();
+}
+
 void Partido::ordenaCandidatos(){
     for(map<int, Candidato*>::iterator it = mapCandidatos.begin(); it != mapCandidatos.end(); ++it){
         listCandidatos.insert(it->second);
     }
-    //listCandidatos.sort();
+    listCandidatos.sort(comparaCandidatos);
 }
 
 void Partido::aumentaVotosLegenda(const int& qtdVotos){

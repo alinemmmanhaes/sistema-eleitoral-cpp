@@ -35,7 +35,8 @@ class Partido{
     const int &getQtdVotosNominais() const;
     const int &getQtdVotosLegenda() const;
     const int &getQtdCandidatosEleitos() const;
-    //candidato
+    map<int, Candidato*> getCandidatos() const;
+    Candidato* getCandidatoPos(const int& i) const;
 
     void insereCandidato(const Candidato* c);
     void calculaQtdCandidatosEleitos();
