@@ -1,13 +1,13 @@
 #include "Candidato.hpp"
 
-const int &Candidato::getNumero() const{
+int Candidato::getNumero() const{
     return numero;
 }
 const string &Candidato::getNome() const{
     return nome;
 }
-Partido* &Candidato::getPartido() const{
-    return *partido;
+Partido* Candidato::getPartido() const{
+    return partido;
 }
 //nascimento
 const int &Candidato::getIdade() const{
@@ -19,7 +19,7 @@ const bool &Candidato::getEleito() const{
 const bool &Candidato::getGenero() const{
     return genero;
 }
-const int &Candidato::getQtdVotos() const{
+int Candidato::getQtdVotos() const{
     return qtdVotos;
 }
 
@@ -27,12 +27,24 @@ void Candidato::aumentaQtdVotos(const int &votos){
     this->qtdVotos += votos;
 }
 void Candidato::calculaIdade(const int& dia, const int& mes, const int& ano){
-
+    if(this->mes < mes) this->idade = ano - this->ano;
+    else if(this->mes > mes) this->idade = ano - this->ano -1;
+    else{
+        if(this->dia <= dia) this->idade = ano - this->ano;
+        else this->idade = ano - this->ano - 1;
+    }
 }
 
-const string &Candidato::toString() const{
-    string s = nome + " (" + partido.getSigla() + ", " + qtdVotos;
-    if(qtdVotos < 2) s += " voto)";
-    else s += " votos)";
-    return s;
+void Candidato::printCandidato() const{
+    cout << nome << " (" << partido->getSigla() << ", " << getQtdVotos();
+    
+    if(qtdVotos < 2) cout << " voto)";
+    else cout << " votos)";
+}
+
+bool comparaCandidatos(Candidato* c1, Candidato* c2){
+    if(c1->getQtdVotos() != c2->getQtdVotos()){
+        return c1->getQtdVotos() > c2->getQtdVotos();
+    }
+    return c1->getIdade() > c2->getIdade();
 }

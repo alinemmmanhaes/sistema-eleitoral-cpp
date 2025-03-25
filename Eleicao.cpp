@@ -35,6 +35,12 @@ map<int, Partido*> Eleicao::getPartidos(){
 Partido* Eleicao::getPartido(const int& num){
     return partidos.at(num);
 }
-const int Eleicao::getDia();
-const int Eleicao::getMes();
-const int Eleicao::getAno();
+const int Eleicao::getDia(){
+    return this->dia;
+}
+const int Eleicao::getMes(){
+    return this->mes;
+}
+const int Eleicao::getAno(){
+    return this->ano;
+}

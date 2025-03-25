@@ -10,6 +10,8 @@
 #include "Candidato.hpp"
 #include "Eleicao.hpp"
 
+using namespace std;
+
 class Relatorio{
     int dia, mes, ano;
     int vagas;
@@ -26,12 +28,12 @@ class Relatorio{
 
         map<int, Candidato*> mapCandidatos = eleicao->getCandidatos();
         for(map<int, Candidato*>::iterator it = mapCandidatos.begin(); it != mapCandidatos.end(); ++it){
-            candidatos.insert(it->second);
+            candidatos.push_back(it->second);
         }
 
         map<int, Partido*> mapPartidos = eleicao->getPartidos();
         for(map<int, Partido*>::iterator it = mapPartidos.begin(); it != mapPartidos.end(); ++it){
-            partidos.insert(it->second);
+            partidos.push_back(it->second);
         }
     }
 
@@ -47,7 +49,6 @@ class Relatorio{
     void relatorio8();
     void relatorio9();
     void relatorio10();
-}
-
+};
 
 #endif // RELATORIO_HPP

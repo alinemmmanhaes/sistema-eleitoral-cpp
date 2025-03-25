@@ -4,7 +4,11 @@
 #include <iostream>
 #include <string>
 
+#define MULHER true
+#define HOMEM false
+
 class Partido;
+#include "Partido.hpp"
 
 using namespace std;
 
@@ -22,23 +26,24 @@ class Candidato{
     Candidato(const int& numero, const string& nome, Partido* partido, const int& dia, const int& mes, const int& ano, const bool& eleito, const bool& genero) : 
     numero(numero), nome(nome), partido(partido), dia(dia), mes(mes), ano(ano), eleito(eleito), genero(genero){
         this->qtdVotos = 0;
-        this->partido->insereCandidato(&this);
         this->idade = 0;
     }
 
-    const int &getNumero() const;
+    int getNumero() const;
     const string &getNome() const;
-    Partido* &getPartido() const;
+    Partido* getPartido() const;
     //nascimento
     const int &getIdade() const;
     const bool &getEleito() const;
     const bool &getGenero() const;
-    const int &getQtdVotos() const;
+    int getQtdVotos() const;
 
     void aumentaQtdVotos(const int &votos);
     void calculaIdade(const int& dia, const int& mes, const int& ano);
 
-    const string &toString() const;
+    void printCandidato() const;
 };
+
+bool comparaCandidatos(Candidato* c1, Candidato* c2);
 
 #endif

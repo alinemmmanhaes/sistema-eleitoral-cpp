@@ -5,6 +5,7 @@
 #include "Candidato.hpp"
 #include "Leitor.hpp"
 #include "Eleicao.hpp"
+#include "Relatorio.hpp"
 
 using namespace std;
 
@@ -25,6 +26,12 @@ int main(int argc, char const *argv[]){
     leitor.leVotacao(arquivoVotacao);
 
     Eleicao* eleicao = leitor.getEleicao();
+
+    Relatorio relatorio(eleicao);
+    relatorio.geraRelatorios();
+
+    //libera memoria da eleicao
+    delete eleicao;
 
     return 0;
 }

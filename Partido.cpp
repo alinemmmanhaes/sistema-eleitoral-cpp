@@ -9,7 +9,7 @@ const string &Partido::getSigla() const{
 const bool &Partido::getFederacao() const{
     return this->federacao;
 }
-const int &Partido::getQtdVotos() const{
+int Partido::getQtdVotos() const{
     return this->qtdVotosLegenda + this->qtdVotosNominais;
 }
 const int &Partido::getQtdVotosNominais() const{
@@ -25,31 +25,24 @@ map<int, Candidato*> Partido::getCandidatos() const{
     return mapCandidatos;
 }
 Candidato* Partido::getCandidatoPos(const int& i) const{
-    list<Candidato*>:: iterator it = listCandidatos.begin();
+    list<Candidato*>::const_iterator it = listCandidatos.begin();
     advance(it, i);
     return *it;
 }
 
-void Partido::insereCandidato(const Candidato* c){
+void Partido::insereCandidato(Candidato* c){
     int numero = c->getNumero();
     mapCandidatos.insert(pair<int, Candidato*> (numero, c));
 }
 void Partido::calculaQtdCandidatosEleitos(){
     for(map<int, Candidato*>::iterator it = mapCandidatos.begin(); it != mapCandidatos.end(); ++it){
-        if((it->second)->getEleito) candidatosEleitos++;
+        if((it->second)->getEleito()) candidatosEleitos++;
     }
-}
-
-bool comparaCandidatos(Candidato* c1, Candidato* c2){
-    if(c1->getQtdVotos() != c2->getQtdVotos()){
-        return c1->getQtdVotos() > c2->getQtdVotos();
-    }
-    return c1->getIdade() > c2->getIdade();
 }
 
 void Partido::ordenaCandidatos(){
     for(map<int, Candidato*>::iterator it = mapCandidatos.begin(); it != mapCandidatos.end(); ++it){
-        listCandidatos.insert(it->second);
+        listCandidatos.push_back(it->second);
     }
     listCandidatos.sort(comparaCandidatos);
 }
@@ -65,28 +58,38 @@ void Partido::aumentaVotosNominais(const int& qtdVotos, Candidato* c){
     }
 }
 
-const string &Partido::toString() const{
+void Partido::printPartido() const{
         int qtdVotos = (qtdVotosNominais+qtdVotosLegenda);
 
-        string saida = sigla + " - " + numero + ", " + qtdVotos;
+        cout << sigla << " - " << numero << ", " << qtdVotos;
 
         if(qtdVotos <2){
-            saida += " voto (";
+            cout << " voto (";
         }
-        else saida += " votos (";
-        saida += qtdVotos-qtdVotosLegenda;
+        else cout << " votos (";
+        cout << qtdVotosNominais;
 
         if((qtdVotosNominais) <2){
-            saida += " nominal e ";
+            cout << " nominal e ";
         }
-        else saida += " nominais e ";
+        else cout << " nominais e ";
 
-        saida += qtdVotosLegenda + " de legenda), " + candidatosEleitos;
+        cout << qtdVotosLegenda << " de legenda), " << candidatosEleitos;
 
         if(candidatosEleitos <2){
-            saida += " candidato eleito";
+            cout << " candidato eleito";
         }
-        else saida += " candidatos eleitos";
+        else cout << " candidatos eleitos";    
+}
 
-        return saida ;
+bool comparaPartidos(Partido* p1, Partido* p2){
+    int diffVotos = p1->getQtdVotos() - p2->getQtdVotos();
+    if(p1->getQtdVotos() != p2->getQtdVotos()){
+        return p1->getQtdVotos() > p2->getQtdVotos();
+    }
+    return (p1->getNumero() > p2->getNumero());
+}
+
+bool comparaPartCand(Partido* p1, Partido* p2){
+    return comparaCandidatos(p1->getCandidatoPos(0), p2->getCandidatoPos(0));
 }

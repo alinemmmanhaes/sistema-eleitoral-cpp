@@ -33,6 +33,6 @@ class Eleicao{
     const int getDia();
     const int getMes();
     const int getAno();
-}
+};
 
 #endif // ELEICAO_HPP

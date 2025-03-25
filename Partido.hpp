@@ -6,6 +6,8 @@
 
 #include <map>
 #include <list>
+
+class Candidato;
 #include "Candidato.hpp"
 
 using namespace std;
@@ -31,21 +33,24 @@ class Partido{
     const int &getNumero() const;
     const string &getSigla() const;
     const bool &getFederacao() const;
-    const int &getQtdVotos() const;
+    int getQtdVotos() const;
     const int &getQtdVotosNominais() const;
     const int &getQtdVotosLegenda() const;
     const int &getQtdCandidatosEleitos() const;
     map<int, Candidato*> getCandidatos() const;
     Candidato* getCandidatoPos(const int& i) const;
 
-    void insereCandidato(const Candidato* c);
+    void insereCandidato(Candidato* c);
     void calculaQtdCandidatosEleitos();
     void ordenaCandidatos();
 
     void aumentaVotosLegenda(const int& qtdVotos);
     void aumentaVotosNominais(const int& qtdVotos, Candidato* c);
 
-    const string &toString() const;
+    void printPartido() const;
 };
+
+bool comparaPartidos(Partido* p1, Partido* p2);
+bool comparaPartCand(Partido* p1, Partido* p2);
 
 #endif
