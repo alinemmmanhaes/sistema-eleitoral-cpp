@@ -23,7 +23,7 @@ void Relatorio::relatorio1(){
         }
     }
 
-    cout << "Número de vagas: " << this->vagas << "\n";
+    cout << "Número de vagas: " << this->vagas << "\n\n";
 }
 
 void Relatorio::relatorio2(){

@@ -87,7 +87,7 @@ bool comparaPartidos(Partido* p1, Partido* p2){
     if(p1->getQtdVotos() != p2->getQtdVotos()){
         return p1->getQtdVotos() > p2->getQtdVotos();
     }
-    return (p1->getNumero() > p2->getNumero());
+    return (p1->getNumero() < p2->getNumero());
 }
 
 bool comparaPartCand(Partido* p1, Partido* p2){
