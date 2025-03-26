@@ -10,7 +10,6 @@ const string &Candidato::getNome() const{
 Partido* Candidato::getPartido() const{
     return partido;
 }
-//nascimento
 const int &Candidato::getIdade() const{
     return idade;
 }

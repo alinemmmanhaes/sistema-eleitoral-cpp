@@ -30,6 +30,7 @@ class Partido{
         this->candidatosEleitos = 0;
     }
 
+    //funções get, para retorno de informações armazenadas dentro de um candidato
     const int &getNumero() const;
     const string &getSigla() const;
     const bool &getFederacao() const;
@@ -40,17 +41,27 @@ class Partido{
     map<int, Candidato*> getCandidatos() const;
     Candidato* getCandidatoPos(const int& i) const;
 
+    //adiciona candidato ao seu partido, assim um terá acesso ao outro
     void insereCandidato(Candidato* c);
+    //calcula quantos candidatos foram eleitos em um partido com base em suas variaveis bool eleito (dos candidatos)
     void calculaQtdCandidatosEleitos();
+    //ordena todos os candidatos de um partido usando o comparador
     void ordenaCandidatos();
 
+    //aumenta o numero de votos de legenda dados ao partido
     void aumentaVotosLegenda(const int& qtdVotos);
+    //aumenta o numero de votos nominais dados ao partido e ao candidato c
     void aumentaVotosNominais(const int& qtdVotos, Candidato* c);
 
+    //printa informações básicas de um partido
     void printPartido() const;
 };
 
+//compara dois partidos a partir de seus votos, e em ultimo caso, por seus numeros
 bool comparaPartidos(Partido* p1, Partido* p2);
+
+/*compara dois partidos a partir de seus candidatos mais votados, 
+utilizando o comparador de candidatos*/
 bool comparaPartCand(Partido* p1, Partido* p2);
 
 #endif

@@ -37,6 +37,10 @@ class Relatorio{
         }
     }
 
+    /*gera cada um dos relatorios especificados, utilizando dados da eleicao, partidos, candidatos, comparadores, 
+    além da criacao de listas encadeadas para facilitar a dinamica das funcoes de relatorio.
+    Os relatorios são printados, em ordem, na saída padrão
+    */
     void geraRelatorios();
 
     void relatorio1();

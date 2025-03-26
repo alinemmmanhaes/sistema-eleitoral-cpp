@@ -77,7 +77,6 @@ void Leitor::leCandidatos(const string& arquivoCandidatos){
             eleicao->adicionaCandidato(c);
             partido->insereCandidato(c);
         }
-        //cout << nomeCandidato << " " << numeroCandidato << siglaPartido << numeroPartido;
     }
 }
 void Leitor::leVotacao(const string& arquivoVotacao){
