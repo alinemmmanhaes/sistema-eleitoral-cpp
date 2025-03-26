@@ -27,11 +27,12 @@ int main(int argc, char const *argv[]){
 
     Eleicao* eleicao = leitor.getEleicao();
 
-    Relatorio relatorio(eleicao);
-    relatorio.geraRelatorios();
+    Relatorio* relatorio = new Relatorio(eleicao);
+    relatorio->geraRelatorios();
 
-    //libera memoria da eleicao
+    eleicao->deleteEleicao();
     delete eleicao;
+    delete relatorio;
 
     return 0;
 }

@@ -1,4 +1,5 @@
 #include "Candidato.hpp"
+#include <locale>
 
 int Candidato::getNumero() const{
     return numero;
@@ -36,10 +37,15 @@ void Candidato::calculaIdade(const int& dia, const int& mes, const int& ano){
 }
 
 void Candidato::printCandidato() const{
+    locale brLocale("pt_BR.UTF-8");
+    cout.imbue(brLocale);
+
     cout << nome << " (" << partido->getSigla() << ", " << getQtdVotos();
     
     if(qtdVotos < 2) cout << " voto)";
     else cout << " votos)";
+
+    cout.imbue(locale("C"));
 }
 
 bool comparaCandidatos(Candidato* c1, Candidato* c2){

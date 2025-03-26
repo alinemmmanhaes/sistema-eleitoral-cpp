@@ -1,4 +1,5 @@
 #include "Partido.hpp"
+#include <locale>
 
 const int &Partido::getNumero() const{
     return this->numero;
@@ -59,31 +60,33 @@ void Partido::aumentaVotosNominais(const int& qtdVotos, Candidato* c){
 }
 
 void Partido::printPartido() const{
-        int qtdVotos = (qtdVotosNominais+qtdVotosLegenda);
+    locale brLocale("pt_BR.UTF-8");
+    cout.imbue(brLocale);
 
-        cout << sigla << " - " << numero << ", " << qtdVotos;
+    int qtdVotos = (qtdVotosNominais+qtdVotosLegenda);
+    cout << sigla << " - " << numero << ", " << qtdVotos;
 
-        if(qtdVotos <2){
-            cout << " voto (";
-        }
-        else cout << " votos (";
-        cout << qtdVotosNominais;
+    if(qtdVotos <2){
+        cout << " voto (";
+    }
+    else cout << " votos (";
 
-        if((qtdVotosNominais) <2){
-            cout << " nominal e ";
-        }
-        else cout << " nominais e ";
+    cout << qtdVotosNominais;
+    if((qtdVotosNominais) <2){
+        cout << " nominal e ";
+    }
+    else cout << " nominais e ";
 
-        cout << qtdVotosLegenda << " de legenda), " << candidatosEleitos;
-
-        if(candidatosEleitos <2){
-            cout << " candidato eleito";
-        }
-        else cout << " candidatos eleitos";    
+    cout << qtdVotosLegenda << " de legenda), " << candidatosEleitos;
+    if(candidatosEleitos <2){
+        cout << " candidato eleito";
+    }
+    else cout << " candidatos eleitos";
+    
+    cout.imbue(locale("C"));
 }
 
 bool comparaPartidos(Partido* p1, Partido* p2){
-    int diffVotos = p1->getQtdVotos() - p2->getQtdVotos();
     if(p1->getQtdVotos() != p2->getQtdVotos()){
         return p1->getQtdVotos() > p2->getQtdVotos();
     }

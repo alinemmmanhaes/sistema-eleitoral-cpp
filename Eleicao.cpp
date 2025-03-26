@@ -44,3 +44,13 @@ const int Eleicao::getMes(){
 const int Eleicao::getAno(){
     return this->ano;
 }
+
+void Eleicao::deleteEleicao(){
+    for(auto it = candidatos.begin(); it != candidatos.end(); it++){
+        delete it->second;
+    }
+
+    for(auto it = partidos.begin(); it != partidos.end(); it++){
+        delete it->second;
+    }
+}

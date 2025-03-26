@@ -1,5 +1,8 @@
 #include "Relatorio.hpp"
+
 #include <algorithm>
+#include <iomanip>
+#include <locale>
 
 void Relatorio::geraRelatorios(){
     relatorio1();
@@ -12,6 +15,8 @@ void Relatorio::geraRelatorios(){
     relatorio8();
     relatorio9();
     relatorio10();
+
+    locale::global(std::locale("C"));
 }
 
 void Relatorio::relatorio1(){
@@ -108,6 +113,10 @@ void Relatorio::relatorio7(){
     list<Partido*> listPartidos;
     list<Partido*> partidosRemove;
 
+    locale brLocale("pt_BR.UTF-8");
+    locale standard("C");
+    cout.imbue(brLocale);
+
     for(auto p: partidos){ //insere todos os elementos que estão na list "partidos"
         listPartidos.push_back(p);
     }
@@ -135,20 +144,30 @@ void Relatorio::relatorio7(){
 
         cout << i << " - " << p->getSigla() << " - " << p->getNumero() << ", ";
 
+        stringstream numeroC1, numeroC2;
+        numeroC1.imbue(standard);
         string saidaVoto = " voto";
         if(c1->getQtdVotos() > 1) saidaVoto += "s";
-        cout << c1->getNome() << " (" << c1->getNumero() << ", " << c1->getQtdVotos() << saidaVoto << ") / ";
+        numeroC1 << c1->getNumero();
+        cout << c1->getNome() << " (" << numeroC1.str() << ", " << c1->getQtdVotos() << saidaVoto << ") / ";
 
         if(c2->getQtdVotos() > 1) saidaVoto = " votos";
         else saidaVoto = " voto";
-        cout << c2->getNome() << " (" << c2->getNumero() << ", " << c2->getQtdVotos() << saidaVoto << ")\n";
+        numeroC2 << c2->getNumero();
+        cout << c2->getNome() << " (" << numeroC2.str() << ", " << c2->getQtdVotos() << saidaVoto << ")\n";
 
         i++;
     }
     cout << "\n";
+
+    cout.imbue(locale("C"));
 }
 
 void Relatorio::relatorio8(){
+    locale brLocale("pt_BR.UTF-8");
+    cout.imbue(brLocale);
+    cout << fixed << setprecision(2);
+
     int menorque30 = 0, entre30e40 = 0, entre40e50 = 0, entre50e60 = 0, maiorque60 = 0;
 
     cout << "Eleitos, por faixa etária (na data da eleição):\n";
@@ -161,15 +180,21 @@ void Relatorio::relatorio8(){
         else maiorque60++;
     }
     int total = eleitosCandidatos.size();
-    cout << "      Idade < 30: " << menorque30 << " (" << 100.0*((double)menorque30)/total << "%)\n"; //%.2f
+    cout << "      Idade < 30: " << menorque30 << " (" << 100.0*((double)menorque30)/total << "%)\n";
     cout << "30 <= Idade < 40: " << entre30e40 << " (" << 100.0*((double)entre30e40)/total << "%)\n";
     cout << "40 <= Idade < 50: " << entre40e50 << " (" << 100.0*((double)entre40e50)/total << "%)\n";
     cout << "50 <= Idade < 60: " << entre50e60 << " (" << 100.0*((double)entre50e60)/total << "%)\n";
     cout << "60 <= Idade     : " << maiorque60 << " (" << 100.0*((double)maiorque60)/total << "%)\n";
     cout << "\n";
+
+    cout.imbue(locale("C"));
 }
 
 void Relatorio::relatorio9(){
+    locale brLocale("pt_BR.UTF-8");
+    cout.imbue(brLocale);
+    cout << fixed << setprecision(2);
+
     int homem = 0, mulher = 0;
 
     for (auto c : eleitosCandidatos) {
@@ -179,12 +204,18 @@ void Relatorio::relatorio9(){
     }
     int total = eleitosCandidatos.size();
     cout << "Eleitos, por gênero:\n";
-    cout << "Feminino:  " << mulher << " (" << 100*((double)mulher)/total << "%)\n"; //%.2f
+    cout << "Feminino:  " << mulher << " (" << 100*((double)mulher)/total << "%)\n";
     cout << "Masculino: " << homem << " (" << 100*((double)homem)/total << "%)\n";
     cout << "\n";
+
+    cout.imbue(locale("C"));
 }
 
 void Relatorio::relatorio10(){
+    locale brLocale("pt_BR.UTF-8");
+    cout.imbue(brLocale);
+    cout << fixed << setprecision(2);
+
     int total = 0, legenda = 0, nominal = 0;
     for (auto p : partidos) {
         total += p->getQtdVotos();
@@ -195,4 +226,6 @@ void Relatorio::relatorio10(){
     cout << "Total de votos nominais:   " << nominal << " (" << (100*((double)nominal)/total) << "%)\n";
     cout << "Total de votos de legenda: " << legenda << " (" << (100*((double)legenda)/total) << "%)\n";
     cout << "\n";
+
+    cout.imbue(locale("C"));
 }
